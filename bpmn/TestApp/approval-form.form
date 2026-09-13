@@ -1,0 +1,33 @@
+{
+  "executionPlatform": "Camunda Cloud",
+  "executionPlatformVersion": "8.9.0",
+  "exporter": {
+    "name": "Camunda Web Modeler",
+    "version": "41fffd2"
+  },
+  "schemaVersion": 19,
+  "id": "Form_0i5zdnn",
+  "components": [
+    {
+      "label": "Text field",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1cl02o2",
+        "columns": null
+      },
+      "id": "Field_1iq3mp6",
+      "key": "comment"
+    },
+    {
+      "label": "Checkbox",
+      "type": "checkbox",
+      "layout": {
+        "row": "Row_0wuobg5",
+        "columns": null
+      },
+      "id": "Field_1drf9vo",
+      "key": "approved"
+    }
+  ],
+  "type": "default"
+}
