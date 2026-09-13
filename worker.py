@@ -18,9 +18,25 @@ async def main():
     worker = ZeebeWorker(channel)
 
     @worker.task(task_type="hello-world")
-    async def handle_hello(job: Job):   # ← ключевое: аннотация job: Job
-        print(f"Received task! Variables: {job.variables}")
+    async def handle_hello(job: Job):
+        print(f"[hello-world] Received task! Variables: {job.variables}")
         return {"greeting": "Hello from Python Worker!"}
+
+    @worker.task(task_type="send-notification")
+    async def handle_notification(job: Job):
+        approved = job.variables.get("approved", False)
+        comment = job.variables.get("comment", "")
+        print(f"[send-notification] START: approved={approved}, comment='{comment}'")
+        await asyncio.sleep(2)  # имитация отправки email
+        print(f"[send-notification] DONE")
+        return {"notification_sent": True}
+
+    @worker.task(task_type="archive-documents")
+    async def handle_archive(job: Job):
+        print(f"[archive-documents] START: process={job.process_instance_key}")
+        await asyncio.sleep(3)  # имитация архивации
+        print(f"[archive-documents] DONE")
+        return {"archived": True}
 
     print("Worker started, waiting for tasks...")
     await worker.work()
